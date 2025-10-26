@@ -15,10 +15,9 @@ jobs:
         brew install chromedriver
     - name: Build app
       run: |
-        pyinstaller --onefile --windowed UI_Ready_modified.py
+        pyinstaller --onefile UI_Ready.py
     - name: Upload artifact
       uses: actions/upload-artifact@v4
       with:
-        name: mac-app
-        path: dist/UI_Ready_modified
-#fix: update upload-artifact to v4
+        name: Build app
+        path: dist/UI_Ready
