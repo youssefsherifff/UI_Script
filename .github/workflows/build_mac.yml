@@ -1,0 +1,23 @@
+name: Build Mac App
+on: [push]
+jobs:
+  build:
+    runs-on: macos-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.9'
+    - name: Install dependencies
+      run: |
+        pip3 install pyinstaller selenium pandas pillow
+        brew install chromedriver
+    - name: Build app
+      run: |
+        pyinstaller --onefile --windowed UI_Ready_modified.py
+    - name: Upload artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: mac-app
+        path: dist/UI_Ready_modified
